@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- build:css -->
+    <link rel="stylesheet" href="styles/css/main.min.css" />
+    <link
+      rel="shortcut icon"
+      href="assets/img/favicon.ico"
+      type="image/x-icon"
+    />
+    <!-- endbuild -->
+    <!-- build:js -->
+    <script src="scripts/js/main.min.js" defer></script>
+    <!-- endbuild -->
+    <title>League of Legends Client Login</title>
+  </head>
+  <body>
+    <main class="client">
+      <section class="client__login-area">
+        <header class="client__login-area__header">
+          <figure>
+            <img
+              class="client__login-area__header__logo"
+              src="assets/img/riot_logo.png"
+              alt="Riot Games Logo"
+              draggable="false"
+            />
+          </figure>
+        </header>
+        <section class="client__login-area__body">
+          <h2 class="client__login-area__body__title">Fazer login</h2>
+          <form id="login-form">
+            <div class="client__login-area__body__input__wrapper">
+              <input
+                class="client__login-area__body__input"
+                type="text"
+                id="username"
+                name="username"
+                onblur="handleFloatingLabel(this); handleUserNameValidation(this)"
+                minlength="2"
+                pattern="[A-Za-z0-9_\-$\s]"
+                required
+              />
+              <label
+                class="client__login-area__body__input__label"
+                for="username"
+                >Nome de usuário</label
+              >
+              <small
+                class="client__login-area__body__input__small--invalid-characters"
+                hidden
+                >Caracteres especiais não são permitidos no nome de
+                usuário</small
+              >
+              <small
+                class="client__login-area__body__input__small--few-characters"
+                hidden
+                >Deve ter pelo menos 2 caracteres</small
+              >
+            </div>
+            <div class="client__login-area__body__input__wrapper">
+              <input
+                class="client__login-area__body__input"
+                type="password"
+                id="password"
+                name="password"
+                onblur="handleFloatingLabel(this)"
+                required
+              />
+              <label
+                class="client__login-area__body__input__label"
+                for="password"
+                >Senha</label
+              >
+            </div>
+          </form>
+        </section>
+        <footer class="client__login-area__footer"></footer>
+      </section>
+      <aside class="client__bg-area">
+        <video
+          class="client__bg-area__background"
+          src="assets/video/login_background.mp4"
+          type="video/mp4"
+          autoplay
+          muted
+          loop
+        ></video>
+      </aside>
+    </main>
+  </body>
+</html>

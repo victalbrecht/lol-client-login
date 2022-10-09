@@ -1,0 +1,153 @@
+// @import "elements/*";
+@import "variables";
+@import "fonts";
+
+* {
+  box-sizing: border-box;
+  font-family: "Colfax", "Arial", "Helvetica", "sans-serif";
+  user-select: none;
+}
+
+html {
+  font-size: $base-font-size;
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    background-color: $body-bg;
+  }
+}
+
+.client {
+  display: flex;
+  width: 1536px;
+  height: 864px;
+
+  &__login-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 26%;
+    padding: 56px;
+    background-color: $login-bg;
+
+    &__header {
+      &__logo {
+        width: 112px;
+        height: 32px;
+      }
+    }
+
+    &__body {
+      width: 100%;
+      margin-top: 40px;
+
+      &__title {
+        font-size: 1.55rem;
+        font-weight: 700;
+        text-align: center;
+        color: $login-title-color;
+      }
+
+      &__input {
+        width: 100%;
+        height: 100%;
+        padding: 20px 6px 8px;
+        border-radius: 4px;
+        border: 2px solid $input-border-color;
+        outline: none;
+        background-color: $input-bg;
+        font-size: 1.1rem;
+        font-weight: 700;
+        transition: linear 0.1s;
+
+        &::-ms-reveal {
+          display: none;
+        }
+
+        &:focus,
+        &--floating-label {
+          + .client__login-area__body__input__label {
+            top: 8px;
+            left: 8px;
+            font-size: 0.65rem;
+          }
+        }
+
+        &:focus {
+          background-color: $input-focus-bg;
+          border-color: $input-focus-border-color;
+
+          + .client__login-area__body__input__label {
+            color: $input-label-focus-color;
+          }
+        }
+
+        &:hover {
+          &:not(:focus) {
+            background-color: $input-hover-bg;
+
+            + .client__login-area__body__input__label {
+              color: $input-label-hover-color;
+            }
+          }
+
+          &:focus {
+            background-color: $input-hover-focus-bg;
+
+            + .client__login-area__body__input__label {
+              color: $input-label-hover-focus-color;
+            }
+          }
+        }
+
+        &--invalid {
+          border-color: $input-invalid-border-color;
+        }
+
+        &__wrapper {
+          position: relative;
+          height: 48px;
+
+          &:first-of-type {
+            margin-top: 28px;
+          }
+
+          &:not(:first-of-type) {
+            margin-top: 16px;
+          }
+        }
+
+        &__label {
+          position: absolute;
+          display: flex;
+          font-size: 0.72rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          color: $input-label-color;
+          transition: linear 0.1s;
+          top: calc(24px - 6px);
+          left: 16px;
+        }
+      }
+    }
+
+    &__footer {
+    }
+  }
+
+  &__bg-area {
+    flex-basis: 74%;
+    overflow: hidden;
+
+    &__background {
+      height: 100%;
+      margin-left: -20%;
+    }
+  }
+}
