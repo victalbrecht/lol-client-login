@@ -11,13 +11,7 @@ const del = require("del");
 
 const productionBuild = process.argv[2] === "build";
 
-const sourceDir = "src";
-const distDir = "dist";
-
-const stylesSourceDir = "styles/scss/*.scss";
-const scriptsSourceDir = "scripts/ts/*.ts";
-const stylesTargetDir = productionBuild ? distDir : `${sourceDir}/styles/css`;
-const scriptsTargetDir = productionBuild ? distDir : `${sourceDir}/scripts/js`;
+const assetsSourceDir = "assets/**/*";
 
 let jsFileName = "";
 let cssFileName = "";
@@ -36,6 +30,7 @@ const transpileAndMinifyTypeScript = () => {
     );
 
   const hashHandler = productionBuild ? file.pipe(hash()) : file;
+  const destDir = productionBuild ? "dist" : "src/scripts/js";
 
   return hashHandler
     .pipe(
@@ -44,15 +39,16 @@ const transpileAndMinifyTypeScript = () => {
         jsFileName = `${path.basename}.js`;
       })
     )
-    .pipe(gulp.dest(scriptsTargetDir));
+    .pipe(gulp.dest(destDir));
 };
 
 const transpileAndMinifySASS = () => {
   const file = gulp
-    .src(`${sourceDir}/${stylesSourceDir}`)
+    .src("src/styles/scss/main.scss")
     .pipe(sass.sync({ outputStyle: "compressed" }));
 
   const hashHandler = productionBuild ? file.pipe(hash()) : file;
+  const destDir = productionBuild ? "dist" : "src/styles/css";
 
   return hashHandler
     .pipe(
@@ -61,20 +57,20 @@ const transpileAndMinifySASS = () => {
         cssFileName = `${path.basename}.css`;
       })
     )
-    .pipe(gulp.dest(stylesTargetDir));
+    .pipe(gulp.dest(destDir));
 };
 
 const watchTypeScript = () =>
-  gulp.watch(`${sourceDir}/${scriptsSourceDir}`, transpileAndMinifyTypeScript);
+  gulp.watch("src/scripts/ts/**/*.ts", transpileAndMinifyTypeScript);
 
 const watchSASS = () =>
-  gulp.watch(`${sourceDir}/${stylesSourceDir}`, transpileAndMinifySASS);
+  gulp.watch("src/styles/scss/*.scss", transpileAndMinifySASS);
 
-const clearBuild = () => del(distDir);
+const clearBuild = () => del("dist");
 
 const replaceHTMLImports = () =>
   gulp
-    .src(`${sourceDir}/index.html`)
+    .src("src/index.html")
     .pipe(
       htmlreplace({
         css: cssFileName,
@@ -84,22 +80,34 @@ const replaceHTMLImports = () =>
         },
       })
     )
-    .pipe(gulp.dest(distDir));
+    .pipe(gulp.dest("dist"));
+
+const handleAssets = () => {
+  gulp.src(["src/assets/**/*.ttf"]).pipe(gulp.dest("dist"));
+};
 
 const startWebServer = () =>
-  gulp.src(sourceDir).pipe(
+  gulp.src("src").pipe(
     webserver({
-      port: 666,
+      host: '192.168.1.200',
+      port: 80,
       livereload: true,
-      open: "http://localhost:666/",
+      open: "http://192.168.1.200/",
     })
   );
 
-exports.serve = gulp.parallel(startWebServer, watchTypeScript, watchSASS);
+exports.serve = gulp.parallel(
+  transpileAndMinifyTypeScript,
+  transpileAndMinifySASS,
+  watchTypeScript,
+  watchSASS,
+  startWebServer,
+);
 
 exports.build = gulp.series(
   clearBuild,
   transpileAndMinifyTypeScript,
   transpileAndMinifySASS,
-  replaceHTMLImports
+  replaceHTMLImports,
+  handleAssets
 );

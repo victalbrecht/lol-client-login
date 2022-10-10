@@ -15,7 +15,17 @@ const loginButtonRef: HTMLButtonElement = document.querySelector(
   ".client__login-area__footer__login-button"
 )!;
 const clientRef: HTMLElement = document.querySelector(".client")!;
-const clientWindowControlsRef: HTMLElement = document.querySelector(".client__window-controls")!;
+const clientWindowControlsRef: HTMLElement = document.querySelector(
+  ".client__window-controls"
+)!;
+
+const resolutions: {
+  [resolutionKey: string]: { width: number; height: number; fontSize: number };
+} = {
+  1280: { width: 1280, height: 720, fontSize: 12 },
+  1600: { width: 1600, height: 900, fontSize: 14 },
+  1920: { width: 1920, height: 1080, fontSize: 15 },
+};
 
 let invalidUsername = true;
 let invalidPassword = true;
@@ -84,34 +94,45 @@ const updateLoginButton = (): void => {
 };
 
 const setDraggableElement = (element: HTMLElement): void => {
-  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  let pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
 
-  const elementDrag = (event: any): void => {
-    event = event ?? window.event;
+  const elementDrag = (event: MouseEvent): void => {
     event.preventDefault();
     pos1 = pos3 - event.clientX;
     pos2 = pos4 - event.clientY;
     pos3 = event.clientX;
     pos4 = event.clientY;
-    element.style.top = (element.offsetTop - pos2) + "px";
-    element.style.left = (element.offsetLeft - pos1) + "px";
-  }
+    element.style.top = element.offsetTop - pos2 + "px";
+    element.style.left = element.offsetLeft - pos1 + "px";
+  };
 
-  const dragMouseDown = (event: any): void => {
-    event = event ?? window.event;
+  const dragMouseDown = (event: MouseEvent): void => {
     event.preventDefault();
     pos3 = event.clientX;
     pos4 = event.clientY;
     document.onmouseup = closeDragElement;
     document.onmousemove = elementDrag;
-  }
+  };
 
   const closeDragElement = (): void => {
     document.onmouseup = null;
     document.onmousemove = null;
-  }
+  };
 
   clientWindowControlsRef.onmousedown = dragMouseDown;
-}
+};
+
+const changeClientSize = ({ value }: Partial<HTMLSelectElement>): void => {
+  if (value) {
+    const { width, height, fontSize }: { width: number, height: number, fontSize: number } = resolutions[value];
+
+    document.documentElement.style.fontSize = `${fontSize}px`;
+    clientRef.style.height = `${height}px`;
+    clientRef.style.width = `${width}px`;
+  }
+};
 
 setDraggableElement(clientRef);
