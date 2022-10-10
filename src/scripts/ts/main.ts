@@ -19,8 +19,14 @@ const clientWindowControlsRef: HTMLElement = document.querySelector(
   ".client__window-controls"
 )!;
 
+interface ResolutionProperties {
+  width: number;
+  height: number;
+  fontSize: number;
+}
+
 const resolutions: {
-  [resolutionKey: string]: { width: number; height: number; fontSize: number };
+  [resolutionKey: string]: ResolutionProperties;
 } = {
   1280: { width: 1280, height: 720, fontSize: 12 },
   1600: { width: 1600, height: 900, fontSize: 14 },
@@ -127,7 +133,8 @@ const setDraggableElement = (element: HTMLElement): void => {
 
 const changeClientSize = ({ value }: Partial<HTMLSelectElement>): void => {
   if (value) {
-    const { width, height, fontSize }: { width: number, height: number, fontSize: number } = resolutions[value];
+    const { width, height, fontSize }: ResolutionProperties =
+      resolutions[value];
 
     document.documentElement.style.fontSize = `${fontSize}px`;
     clientRef.style.height = `${height}px`;

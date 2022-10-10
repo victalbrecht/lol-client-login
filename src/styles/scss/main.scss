@@ -41,6 +41,7 @@ input[type="checkbox"] {
   position: fixed;
   left: 0;
   bottom: 0;
+  z-index: 1;
 }
 
 .client {
@@ -138,7 +139,7 @@ input[type="checkbox"] {
         background-color: $input-bg;
         font-size: 1.1rem;
         font-weight: 700;
-        transition: linear 0.1s;
+        transition: background-color 0.1s, border-color 0.1s;
 
         &::-ms-reveal {
           display: none;
@@ -213,7 +214,7 @@ input[type="checkbox"] {
           top: calc(24px - 0.72rem / 2);
           left: 16px;
           cursor: text;
-          transition: linear 0.1s;
+          transition: top 0.1s, left 0.1s, color 0.1s;
         }
 
         &__small {
@@ -415,11 +416,11 @@ input[type="checkbox"] {
         text-transform: uppercase;
         color: $login-help-link-color;
         cursor: pointer;
-        
+
         &:hover {
           color: $login-help-link-hover-color;
         }
-        
+
         &:first-of-type {
           margin-top: 72px;
         }
