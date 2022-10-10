@@ -4,22 +4,42 @@ $body-bg: #6e6e6e;
 
 $login-title-color: #111111;
 $login-bg: #f9f9f9;
+$login-button-bg: #d13639;
+$login-button-color: #f9f9f9;
+$login-button-hover-bg: #bc252a;
+$login-button-active-bg: #a81318;
+$login-button-disabled-bg: #f9f9f9;
+$login-button-disabled-outline-color: #e8e8e8;
+
+$login-help-link-color: #B2B2C2;
+$login-help-link-hover-color: #111111;
+
+$client-window-controls-button-color: #adb6a9;
+
+$client-window-controls-minimize-button-hover-bg: rgba(255, 255, 255, 0.1);
+$client-window-controls-minimize-button-hover-color: #f9f9f9;
+$client-window-controls-close-button-hover-color: #f4f6ec;
+$client-window-controls-close-button-hover-bg: #d13639;
+
+$client-window-controls-minimize-button-active-bg: rgba(255, 255, 255, 0.15);
+$client-window-controls-close-button-active-bg: #bd2a2c;
 
 $input-bg: #ededed;
 $input-label-color: #999999;
 $input-border-color: transparent;
-
 $input-focus-bg: #f9f9f9;
 $input-label-focus-color: #9c9c9c;
 $input-focus-border-color: #333333;
-
 $input-hover-bg: #e7e7e7;
 $input-label-hover-color: #7e7e7e;
-
 $input-hover-focus-bg: #f9f9f9;
 $input-label-hover-focus-color: #868686;
-
 $input-invalid-bg: #f3e3f5;
 $input-label-invalid-color: #c647d2;
 $input-invalid-border-color: #eabfef;
 $input-invalid-hint-color: #be29cc;
+
+$checkbox-bg: #e6e6e6;
+$checkbox-label-color: #211e1f;
+$checkbox-checked-bg: #c73033;
+$checkbox-checked-color: #f9f9f9;

@@ -1,6 +1,5 @@
-// @import "elements/*";
 @import "variables";
-@import "fonts";
+@import "fonts/fonts";
 
 * {
   box-sizing: border-box;
@@ -23,10 +22,77 @@ html {
   }
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  border: none;
+}
+
+input[type="checkbox"] {
+  margin: 0;
+}
+
 .client {
   display: flex;
-  width: 1536px;
-  height: 864px;
+  position: absolute;
+  width: 60vw;
+  height: 67vh;
+
+  &__window-controls {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+
+    &__button {
+      &--minimize,
+      &--close {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 24px;
+        color: $client-window-controls-button-color;
+        background-color: transparent;
+        cursor: pointer;
+      }
+
+      &--minimize {
+        &:hover {
+          color: $client-window-controls-minimize-button-hover-color;
+          background-color: $client-window-controls-minimize-button-hover-bg;
+        }
+
+        &:active {
+          background-color: $client-window-controls-minimize-button-active-bg;
+        }
+
+        > .fa-regular {
+          margin-bottom: -4px;
+        }
+      }
+
+      &--close {
+        &:hover {
+          color: $client-window-controls-close-button-hover-color;
+          background-color: $client-window-controls-close-button-hover-bg;
+        }
+
+        &:active {
+          background-color: $client-window-controls-close-button-active-bg;
+        }
+
+        > .fa-regular {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
 
   &__login-area {
     display: flex;
@@ -45,18 +111,19 @@ html {
 
     &__body {
       width: 100%;
-      margin-top: 40px;
+      margin-top: 44px;
 
       &__title {
         font-size: 1.55rem;
         font-weight: 700;
         text-align: center;
+        letter-spacing: -1px;
         color: $login-title-color;
       }
 
       &__input {
         width: 100%;
-        height: 100%;
+        height: 48px;
         padding: 20px 6px 8px;
         border-radius: 4px;
         border: 2px solid $input-border-color;
@@ -107,15 +174,23 @@ html {
         }
 
         &--invalid {
-          border-color: $input-invalid-border-color;
+          &,
+          &:hover,
+          &:focus {
+            background-color: $input-invalid-bg !important;
+            border-color: $input-invalid-border-color !important;
+
+            + .client__login-area__body__input__label {
+              color: $input-label-invalid-color !important;
+            }
+          }
         }
 
         &__wrapper {
           position: relative;
-          height: 48px;
 
           &:first-of-type {
-            margin-top: 28px;
+            margin-top: 8px;
           }
 
           &:not(:first-of-type) {
@@ -130,14 +205,202 @@ html {
           font-weight: 700;
           text-transform: uppercase;
           color: $input-label-color;
-          transition: linear 0.1s;
           top: calc(24px - 6px);
           left: 16px;
+          cursor: text;
+          transition: linear 0.1s;
+        }
+
+        &__small {
+          &--invalid-characters,
+          &--few-characters {
+            &,
+            &--visible {
+              margin-top: 8px;
+              font-weight: 700;
+              font-size: 0.9rem;
+              color: $input-invalid-hint-color;
+            }
+
+            &--visible {
+              display: block;
+            }
+          }
+        }
+      }
+
+      &__social-medias {
+        margin-top: 24px;
+
+        &__list {
+          display: flex;
+
+          &__item {
+            &--facebook,
+            &--google,
+            &--apple {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 32px;
+              flex: 1;
+              border-radius: 4px;
+              cursor: pointer;
+              color: #ffffff;
+            }
+
+            &--google,
+            &--apple {
+              margin-left: 8px;
+            }
+
+            @mixin social-media-button(
+              $defaultBackground,
+              $hoverBackground,
+              $activeBackground,
+              $icon-size
+            ) {
+              background-color: $defaultBackground;
+
+              &:hover {
+                background-color: $hoverBackground;
+              }
+
+              &:active {
+                background-color: $activeBackground;
+              }
+
+              > .fa-brands {
+                width: $icon-size;
+                height: $icon-size;
+                font-size: $icon-size;
+                text-align: center;
+              }
+            }
+
+            &--facebook {
+              @include social-media-button(#1877f2, #0966de, #004fb5, 1.15rem);
+            }
+
+            &--google {
+              @include social-media-button(#ffffff, #f9f9f9, #f0f0f0, 1.3rem);
+              border: 2px solid #f2f2f2;
+
+              &:active {
+                border-color: #e4e4e4;
+              }
+
+              > .fa-brands {
+                background: conic-gradient(
+                    from -45deg,
+                    #ea4335 110deg,
+                    #4285f4 90deg 180deg,
+                    #34a853 180deg 270deg,
+                    #fbbc05 270deg
+                  )
+                  73% 55%/150% 150% no-repeat;
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+              }
+            }
+
+            &--apple {
+              @include social-media-button(#000000, #141414, #292929, 1.45rem);
+            }
+          }
+        }
+      }
+
+      &__keep-login {
+        display: flex;
+        align-items: center;
+        position: relative;
+        margin-top: 16px;
+
+        &__checkbox {
+          &__label {
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding-left: 24px;
+            color: $checkbox-label-color;
+
+            &::before {
+              content: "";
+              position: absolute;
+              left: 0;
+              border-radius: 4px;
+              width: 16px;
+              height: 16px;
+              background-color: $checkbox-bg;
+            }
+          }
+
+          &:checked + &__label::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: $checkbox-checked-color;
+            background-color: $checkbox-checked-bg;
+          }
+
+          &,
+          &__label {
+            cursor: pointer;
+          }
         }
       }
     }
 
     &__footer {
+      align-items: center;
+      margin-top: auto;
+
+      &__login-button {
+        height: 64px;
+        width: 64px;
+        border-radius: 20px;
+        background-color: $login-button-bg;
+        color: $login-button-color;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $login-button-hover-bg;
+        }
+
+        &:active {
+          background-color: $login-button-active-bg;
+        }
+
+        &:disabled {
+          background-color: $login-button-disabled-bg;
+          border: 2px solid $login-button-disabled-outline-color;
+          color: $login-button-disabled-outline-color;
+          cursor: default;
+        }
+      }
+
+      &__cant-login-link {
+        margin-top: 72px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: $login-help-link-color;
+        cursor: pointer;
+
+        &:hover {
+          color: $login-help-link-hover-color;
+        }
+      }
+    }
+
+    &__body,
+    &__footer {
+      display: flex;
+      flex-direction: column;
     }
   }
 
@@ -147,7 +410,7 @@ html {
 
     &__background {
       height: 100%;
-      margin-left: -20%;
+      margin-left: -27%;
     }
   }
 }
