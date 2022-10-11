@@ -40,6 +40,7 @@ const transpileAndMinifySASS = () =>
       rename((path) => {
         path.basename += ".min";
       })
+    .pipe(replace('../', ''))
     )
     .pipe(gulp.dest(productionBuild ? distDir : `${sourceDir}/styles/css`));
 
