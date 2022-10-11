@@ -28,6 +28,7 @@ interface ResolutionProperties {
 const resolutions: {
   [resolutionKey: string]: ResolutionProperties;
 } = {
+  1024: { width: 1024, height: 576, fontSize: 11 },
   1280: { width: 1280, height: 720, fontSize: 12 },
   1600: { width: 1600, height: 900, fontSize: 14 },
   1920: { width: 1920, height: 1080, fontSize: 15 },

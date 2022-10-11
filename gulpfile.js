@@ -8,8 +8,8 @@ const minify = require("gulp-minify");
 const del = require("del");
 const replace = require("gulp-replace");
 
-const sourceDir = 'src';
-const distDir = 'build';
+const sourceDir = "src";
+const distDir = "build";
 
 const productionBuild = process.argv[2] === "build";
 
@@ -32,17 +32,23 @@ const transpileAndMinifyTypeScript = () =>
     )
     .pipe(gulp.dest(productionBuild ? distDir : `${sourceDir}/scripts/js`));
 
-const transpileAndMinifySASS = () =>
-  gulp
+const transpileAndMinifySASS = () => {
+  let transpiledSASS = gulp
     .src("src/styles/scss/main.scss")
-    .pipe(sass.sync({ outputStyle: "compressed" }))
-    .pipe(replace('../', ''))
+    .pipe(sass.sync({ outputStyle: "compressed" }));
+
+  transpiledSASS = productionBuild
+    ? transpiledSASS.pipe(replace("../", ""))
+    : transpiledSASS;
+
+  return transpiledSASS
     .pipe(
       rename((path) => {
         path.basename += ".min";
       })
     )
     .pipe(gulp.dest(productionBuild ? distDir : `${sourceDir}/styles/css`));
+};
 
 const watchTypeScript = () =>
   gulp.watch(`${sourceDir}/scripts/ts/**/*.ts`, transpileAndMinifyTypeScript);
