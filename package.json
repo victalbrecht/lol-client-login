@@ -1,15 +1,19 @@
 {
+  "homepage": "http://victalbrecht.github.io/lol-client-login",
   "name": "lol-client-login",
   "version": "1.0.0",
   "description": "A League of Legends Client Login Clone",
   "scripts": {
     "start": "gulp serve",
-    "build": "gulp build"
+    "build": "gulp build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "author": "Victor Albrecht",
   "license": "ISC",
   "devDependencies": {
     "del": "^6.1.1",
+    "gh-pages": "^4.0.0",
     "gulp": "^4.0.2",
     "gulp-minify": "^3.1.0",
     "gulp-rename": "^2.0.0",

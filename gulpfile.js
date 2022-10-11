@@ -9,7 +9,7 @@ const del = require("del");
 const replace = require("gulp-replace");
 
 const sourceDir = 'src';
-const distDir = 'dist';
+const distDir = 'build';
 
 const productionBuild = process.argv[2] === "build";
 
