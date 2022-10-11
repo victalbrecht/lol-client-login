@@ -36,11 +36,11 @@ const transpileAndMinifySASS = () =>
   gulp
     .src("src/styles/scss/main.scss")
     .pipe(sass.sync({ outputStyle: "compressed" }))
+    .pipe(replace('../', ''))
     .pipe(
       rename((path) => {
         path.basename += ".min";
       })
-    .pipe(replace('../', ''))
     )
     .pipe(gulp.dest(productionBuild ? distDir : `${sourceDir}/styles/css`));
 

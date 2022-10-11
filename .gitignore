@@ -103,5 +103,7 @@ dist
 # TernJS port file
 .tern-port
 
-# Generic build output
+# Custom build output directories
 build
+src/scripts/js
+src/styles/css
