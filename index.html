@@ -6,15 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="shortcut icon"
-      href="assets/img/favicon.ico?v=4de0ae5hgcgf9"
+      href="assets/img/favicon.ico?v=gehg9cg89hbba"
       type="image/x-icon"
     />
-    <link rel="stylesheet" href="main.min.css?v=4de0ae5hgcgf9" />
-    <script src="main.min.js?v=4de0ae5hgcgf9" defer></script>
+    <link rel="stylesheet" href="main.min.css?v=gehg9cg89hbba" />
+    <script src="main.min.js?v=gehg9cg89hbba" defer></script>
     <title>League of Legends Client Login</title>
   </head>
   <body>
-    <select class="client-resolution-selector" onchange="changeClientSize(this)">
+    <select
+      class="client-resolution-selector"
+      onchange="changeClientSize(this)"
+    >
       <option value="" selected>Resolução do client</option>
       <option value="1024">1024 x 576</option>
       <option value="1280">1280 x 720</option>
@@ -35,7 +38,7 @@
           <figure>
             <img
               class="client__login-area__header__logo"
-              src="assets/img/riot-logo.png?v=4de0ae5hgcgf9"
+              src="assets/img/riot-logo.png?v=gehg9cg89hbba"
               alt="Riot Games Logo"
               draggable="false"
             />
@@ -107,28 +110,38 @@
               </ul>
             </div>
             <div class="client__login-area__body__keep-login">
-              <input class="client__login-area__body__keep-login__checkbox" type="checkbox" name="keep-login" id="keep-login" hidden>
-              <label class="client__login-area__body__keep-login__checkbox__label" for="keep-login">Manter login</label>
+              <input
+                class="client__login-area__body__keep-login__checkbox"
+                type="checkbox"
+                name="keep-login"
+                id="keep-login"
+                hidden
+              />
+              <label
+                class="client__login-area__body__keep-login__checkbox__label"
+                for="keep-login"
+                >Manter login</label
+              >
             </div>
           </form>
         </section>
         <footer class="client__login-area__footer">
-          <button type="submit" form="login-form" class="client__login-area__footer__login-button" disabled>
+          <button
+            type="submit"
+            form="login-form"
+            class="client__login-area__footer__login-button"
+            disabled
+          >
             <i class="fa-regular fa-arrow-right fa-2xl"></i>
           </button>
-          <a class="client__login-area__footer__link">Não consegue iniciar sessão?</a>
+          <a class="client__login-area__footer__link"
+            >Não consegue iniciar sessão?</a
+          >
           <a class="client__login-area__footer__link">Criar uma conta</a>
         </footer>
       </section>
       <aside class="client__bg-area">
-        <video
-          class="client__bg-area__background"
-          src="assets/video/login-background.mp4?v=4de0ae5hgcgf9"
-          type="video/mp4"
-          autoplay
-          muted
-          loop
-        ></video>
+        <img class="client__bg-area__background" />
       </aside>
     </main>
   </body>
