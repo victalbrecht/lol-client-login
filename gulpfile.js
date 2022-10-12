@@ -68,7 +68,7 @@ const replaceAndHashHTMLResources = () => {
     .src(`${sourceDir}/index.html`)
     .pipe(replace(/(href=")(.+\/)(.*.css)(")/gi, `$1$3?v=${hash}$4`))
     .pipe(replace(/(src=")(.+\/)(.*.js)(")/gi, `$1$3?v=${hash}$4`))
-    .pipe(replace(/(src|href)(=".+\.)(mp4|png|ico)(")/gi, `$1$2$3?v=${hash}$4`))
+    .pipe(replace(/(src|href)(=".+\.)(png|jpg|ico)(")/gi, `$1$2$3?v=${hash}$4`))
     .pipe(gulp.dest(distDir));
 };
 

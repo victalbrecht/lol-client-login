@@ -15,9 +15,6 @@ const loginButtonRef: HTMLButtonElement = document.querySelector(
   ".client__login-area__footer__login-button"
 )!;
 const clientRef: HTMLElement = document.querySelector(".client")!;
-const clientWindowControlsRef: HTMLElement = document.querySelector(
-  ".client__window-controls"
-)!;
 
 interface ResolutionProperties {
   width: number;
@@ -100,6 +97,29 @@ const updateLoginButton = (): void => {
     : loginButtonRef.removeAttribute("disabled");
 };
 
+const changeClientSize = ({ value }: Partial<HTMLSelectElement>): void => {
+  if (value) {
+    const { width, height, fontSize }: ResolutionProperties =
+      resolutions[value];
+
+    document.documentElement.style.fontSize = `${fontSize}px`;
+    clientRef.style.height = `${height}px`;
+    clientRef.style.width = `${width}px`;
+  }
+};
+
+const setRandomSplash = () => {
+  const clientBackgroundRef: HTMLImageElement = document.querySelector('.client__bg-area__background');
+  const randomSplashId: number = Math.floor(Math.random() * 160);
+  clientBackgroundRef.setAttribute('src', `assets/img/splash/${randomSplashId}.jpg`); 
+};
+
+setRandomSplash();
+
+const clientWindowControlsRef: HTMLElement = document.querySelector(
+  ".client__window-controls"
+)!;
+
 const setDraggableElement = (element: HTMLElement): void => {
   let pos1 = 0,
     pos2 = 0,
@@ -130,17 +150,6 @@ const setDraggableElement = (element: HTMLElement): void => {
   };
 
   clientWindowControlsRef.onmousedown = dragMouseDown;
-};
-
-const changeClientSize = ({ value }: Partial<HTMLSelectElement>): void => {
-  if (value) {
-    const { width, height, fontSize }: ResolutionProperties =
-      resolutions[value];
-
-    document.documentElement.style.fontSize = `${fontSize}px`;
-    clientRef.style.height = `${height}px`;
-    clientRef.style.width = `${width}px`;
-  }
 };
 
 setDraggableElement(clientRef);
