@@ -48,7 +48,7 @@ const transpileAndMinifyTypeScript = () =>
 
 const transpileAndMinifySASS = () => {
   let transpiledSASS = gulp
-    .src("src/styles/scss/**/*.scss")
+    .src("src/styles/scss/main.scss")
     .pipe(sass.sync({ outputStyle: "compressed" }));
 
   transpiledSASS = productionBuild
@@ -108,6 +108,6 @@ exports.build = gulp.series(
   clearDist,
   transpileAndMinifyTypeScript,
   transpileAndMinifySASS,
-  handleAssets,
-  replaceAndHashHTMLResources
+  replaceAndHashHTMLResources,
+  handleAssets
 );
