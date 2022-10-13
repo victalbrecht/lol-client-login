@@ -37,18 +37,23 @@ input[type="checkbox"] {
   margin: 0;
 }
 
-.client-resolution-selector {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  z-index: 1;
-}
-
 .client {
   display: flex;
   position: absolute;
   width: 1600px;
   height: 900px;
+
+  &__resolution-selector, &__splash-selector {
+    position: fixed;
+    width: 100px;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  &__splash-selector {
+    left: 120px;
+  }
 
   &__window-controls {
     display: flex;
@@ -277,7 +282,7 @@ input[type="checkbox"] {
 
             &--google,
             &--apple {
-              margin-left: .8rem;
+              margin-left: 0.8rem;
             }
 
             @mixin social-media-button(
@@ -355,7 +360,7 @@ input[type="checkbox"] {
               content: "";
               position: absolute;
               left: 0;
-              border-radius: .2rem;
+              border-radius: 0.2rem;
               width: 1.3rem;
               height: 1.3rem;
               background-color: $checkbox-bg;
@@ -440,7 +445,6 @@ input[type="checkbox"] {
 
     &__background {
       height: 100%;
-      margin-left: -27%;
     }
   }
 }

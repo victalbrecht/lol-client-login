@@ -2,11 +2,11 @@ const gulp = require("gulp");
 const rename = require("gulp-rename");
 const webserver = require("gulp-webserver");
 const ts = require("gulp-typescript");
-const tsProject = ts.createProject("tsconfig.json");
 const sass = require("gulp-sass")(require("sass"));
 const minify = require("gulp-minify");
 const del = require("del");
 const replace = require("gulp-replace");
+const concat = require("gulp-concat");
 
 const sourceDir = "src";
 const distDir = "build";
@@ -14,10 +14,23 @@ const distDir = "build";
 const productionBuild = process.argv[2] === "build";
 
 const transpileAndMinifyTypeScript = () =>
-  tsProject
-    .src()
-    .pipe(tsProject())
-    .js.pipe(
+  gulp
+    .src("src/scripts/ts/**/*.ts")
+    .pipe(
+      ts({
+        noImplicitAny: true,
+        lib: [
+          "DOM",
+          "ES2015.Core",
+          "DOM.Iterable",
+          "ES2015.Collection",
+          "ES2015.Iterable",
+          "ES2015",
+        ],
+        target: "es5",
+      })
+    )
+    .pipe(
       minify({
         ext: {
           min: ".js",
@@ -30,11 +43,12 @@ const transpileAndMinifyTypeScript = () =>
         path.basename += ".min";
       })
     )
+    .pipe(concat('main.min.js'))
     .pipe(gulp.dest(productionBuild ? distDir : `${sourceDir}/scripts/js`));
 
 const transpileAndMinifySASS = () => {
   let transpiledSASS = gulp
-    .src("src/styles/scss/main.scss")
+    .src("src/styles/scss/**/*.scss")
     .pipe(sass.sync({ outputStyle: "compressed" }));
 
   transpiledSASS = productionBuild
