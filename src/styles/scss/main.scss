@@ -43,7 +43,8 @@ input[type="checkbox"] {
   width: 1600px;
   height: 900px;
 
-  &__resolution-selector, &__splash-selector {
+  &__resolution-selector,
+  &__splash-selector {
     position: fixed;
     width: 100px;
     bottom: 0;
@@ -241,7 +242,7 @@ input[type="checkbox"] {
                 left: 0;
                 width: 0.8rem;
                 height: 0.8rem;
-                border-radius: 2rem;
+                border-radius: 0.2rem;
                 transform: rotate(45deg);
                 background-color: $input-invalid-hint-color;
               }
