@@ -68,7 +68,7 @@ const watchTypeScript = () =>
   gulp.watch(`${sourceDir}/scripts/ts/**/*.ts`, transpileAndMinifyTypeScript);
 
 const watchSASS = () =>
-  gulp.watch(`${sourceDir}/styles/scss/*.scss`, transpileAndMinifySASS);
+  gulp.watch(`${sourceDir}/styles/scss/**/*.scss`, transpileAndMinifySASS);
 
 const clearDist = () => del(distDir);
 

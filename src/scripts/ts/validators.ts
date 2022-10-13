@@ -1,24 +1,18 @@
-const invalidInputClass: string = "client__login-area__body__input--invalid";
+const invalidInputClass: string = "client__input--invalid";
 
-const floatingClass: string = "client__login-area__body__input--floating-label";
+const visibleSmallClass: string =
+  "client__input__small--visible";
 
-const visibleInvalidCharactersSmallClass: string =
-  "client__login-area__body__input__small--invalid-characters--visible";
-
-const visibleFewCharactersSmallClass: string =
-  "client__login-area__body__input__small--few-characters--visible";
-
-const invalidCharactersSmallRef: HTMLElement = document.querySelector(
-  ".client__login-area__body__input__small--invalid-characters"
+const invalidCharactersSmallRef: HTMLElement = document.getElementById(
+  "invalid-chars-small"
 )!;
 
-const fewCharactersSmallRef: HTMLElement = document.querySelector(
-  ".client__login-area__body__input__small--few-characters"
-)!;
+const fewCharactersSmallRef: HTMLElement =
+  document.getElementById("few-chars-small")!;
 
-const loginButtonRef: HTMLButtonElement = document.querySelector(
-  ".client__login-area__footer__login-button"
-)!;
+const loginButtonRef: HTMLButtonElement = document.getElementById(
+  "login-btn"
+)! as HTMLButtonElement;
 
 let invalidUsername = true;
 let invalidPassword = true;
@@ -28,15 +22,6 @@ const isInvalidUsernameLength = (username: string): boolean =>
 
 const isInvalidUsernamePattern = (username: string): boolean =>
   new RegExp(/[^A-Za-z0-9_\-$]/).test(username);
-
-const handleFloatingLabel = ({
-  value,
-  classList,
-}: Partial<HTMLInputElement>): void => {
-  value !== ""
-    ? classList!.add(floatingClass)
-    : classList!.remove(floatingClass);
-};
 
 const handleUsernameValidation = ({
   value,
@@ -54,9 +39,9 @@ const handleUsernameErrorHints = ({
   invalidCharactersSmallRef.hidden = true;
   fewCharactersSmallRef.hidden = true;
   classList!.remove(invalidInputClass);
-  fewCharactersSmallRef.classList.remove(visibleFewCharactersSmallClass);
+  fewCharactersSmallRef.classList.remove(visibleSmallClass);
   invalidCharactersSmallRef.classList.remove(
-    visibleInvalidCharactersSmallClass
+    visibleSmallClass
   );
 
   if (value !== "") {
@@ -64,11 +49,11 @@ const handleUsernameErrorHints = ({
 
     if (isInvalidUsernameLength(value!)) {
       fewCharactersSmallRef.hidden = false;
-      fewCharactersSmallRef.classList.add(visibleFewCharactersSmallClass);
+      fewCharactersSmallRef.classList.add(visibleSmallClass);
     } else if (isInvalidUsernamePattern(value!)) {
       invalidCharactersSmallRef.hidden = false;
       invalidCharactersSmallRef.classList.add(
-        visibleInvalidCharactersSmallClass
+        visibleSmallClass
       );
     }
   }

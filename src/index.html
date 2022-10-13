@@ -16,10 +16,10 @@
   <body>
     <main class="client">
       <section class="client__window-controls">
-        <button class="client__window-controls__button--minimize">
+        <button class="client__button client__window-controls__button--minimize">
           <i class="fa-regular fa-minus"></i>
         </button>
-        <button class="client__window-controls__button--close">
+        <button class="client__button client__window-controls__button--close">
           <i class="fa-regular fa-close"></i>
         </button>
       </section>
@@ -37,51 +37,54 @@
         <section class="client__login-area__body">
           <h2 class="client__login-area__body__title">Fazer login</h2>
           <form id="login-form" onsubmit="return false">
-            <div class="client__login-area__body__input__wrapper">
+            <div class="client__input">
               <input
-                class="client__login-area__body__input"
+                class="client__input__field"
                 type="text"
                 id="username"
                 name="username"
                 autocomplete="off"
+                placeholder=" "
                 onkeyup="handleUsernameValidation(this); updateLoginButton()"
-                onblur="handleFloatingLabel(this); handleUsernameErrorHints(this)"
+                onblur="handleUsernameErrorHints(this)"
               />
               <label
-                class="client__login-area__body__input__label"
+                class="client__input__label"
                 for="username"
                 >Nome de usuário</label
               >
               <small
-                class="client__login-area__body__input__small--invalid-characters"
+                class="client__input__small"
+                id="invalid-chars-small"
                 hidden
                 >Caracteres especiais não são permitidos no nome de
                 usuário</small
               >
               <small
-                class="client__login-area__body__input__small--few-characters"
+                class="client__input__small"
+                id="few-chars-small"
                 hidden
                 >Deve ter pelo menos 2 caracteres</small
               >
             </div>
-            <div class="client__login-area__body__input__wrapper">
+            <div class="client__input">
               <input
-                class="client__login-area__body__input"
+                class="client__input__field"
                 type="password"
                 id="password"
                 name="password"
                 autocomplete="off"
+                placeholder=" "
                 onkeyup="handlePasswordValidation(this); updateLoginButton()"
-                onblur="handleFloatingLabel(this)"
               />
               <label
-                class="client__login-area__body__input__label"
+                class="client__input__label"
                 for="password"
                 >Senha</label
               >
             </div>
             <div class="client__login-area__body__social-medias">
-              <ul class="client__login-area__body__social-medias__list">
+              <ul class="client__list client__login-area__body__social-medias__list">
                 <li
                   class="client__login-area__body__social-medias__list__item--facebook"
                 >
@@ -101,14 +104,14 @@
             </div>
             <div class="client__login-area__body__keep-login">
               <input
-                class="client__login-area__body__keep-login__checkbox"
+                class="client__input__checkbox"
                 type="checkbox"
                 name="keep-login"
                 id="keep-login"
                 hidden
               />
               <label
-                class="client__login-area__body__keep-login__checkbox__label"
+                class="client__input__checkbox__label"
                 for="keep-login"
                 >Manter login</label
               >
@@ -119,15 +122,16 @@
           <button
             type="submit"
             form="login-form"
-            class="client__login-area__footer__login-button"
+            class="client__button--primary-action"
+            id="login-btn"
             disabled
           >
             <i class="fa-regular fa-arrow-right fa-2xl"></i>
           </button>
-          <a class="client__login-area__footer__link"
+          <a class="client__link"
             >Não consegue iniciar sessão?</a
           >
-          <a class="client__login-area__footer__link">Criar uma conta</a>
+          <a class="client__link">Criar uma conta</a>
         </footer>
       </section>
       <aside class="client__bg-area">
