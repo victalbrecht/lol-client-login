@@ -43,7 +43,7 @@ const transpileAndMinifyTypeScript = () =>
         path.basename += ".min";
       })
     )
-    .pipe(concat('main.min.js'))
+    .pipe(concat("main.min.js"))
     .pipe(gulp.dest(productionBuild ? distDir : `${sourceDir}/scripts/js`));
 
 const transpileAndMinifySASS = () => {
@@ -77,12 +77,15 @@ const handleAssets = () =>
 
 const replaceAndHashHTMLResources = () => {
   const hash = (Math.random() + 1).toString(18).substring(2);
+  const filesTypesToHash = ["css", "js", "ico", "png", "mp4"];
+  const replaceRegExp = new RegExp(
+    `(src|href)(=".+\.)(${filesTypesToHash.join("|")})(")`,
+    "gi"
+  );
 
   return gulp
     .src(`${sourceDir}/index.html`)
-    .pipe(replace(/(href=")(.+\/)(.*.css)(")/gi, `$1$3?v=${hash}$4`))
-    .pipe(replace(/(src=")(.+\/)(.*.js)(")/gi, `$1$3?v=${hash}$4`))
-    .pipe(replace(/(src|href)(=".+\.)(png|jpg|ico)(")/gi, `$1$2$3?v=${hash}$4`))
+    .pipe(replace(replaceRegExp, `$1$2$3?v=${hash}$4`))
     .pipe(gulp.dest(distDir));
 };
 
