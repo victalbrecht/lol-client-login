@@ -31,10 +31,8 @@ html {
 .client {
   display: flex;
   position: absolute;
-  width: 1600px;
-  height: 900px;
 
-  &__resolution-selector {
+  &__resolution-select {
     position: fixed;
     width: 100px;
     bottom: 0;

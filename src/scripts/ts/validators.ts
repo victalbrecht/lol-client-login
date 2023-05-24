@@ -1,7 +1,6 @@
-const invalidInputClass: string = "client__input__field--invalid";
-
-const visibleSmallClass: string =
-  "client__input__small--visible";
+const usernameInputRef: HTMLInputElement = document.getElementById(
+  "username-input"
+)! as HTMLInputElement;
 
 const invalidCharactersSmallRef: HTMLElement = document.getElementById(
   "invalid-chars-small"
@@ -14,60 +13,100 @@ const loginButtonRef: HTMLButtonElement = document.getElementById(
   "login-btn"
 )! as HTMLButtonElement;
 
-let invalidUsername = true;
-let invalidPassword = true;
+const invalidInputClass: string = "client__input__field--invalid";
+const visibleSmallClass: string = "client__input__small--visible";
 
-const isInvalidUsernameLength = (username: string): boolean =>
-  username.length < 2;
+let validUsername: boolean = false;
+let validPassword: boolean = false;
 
-const isInvalidUsernamePattern = (username: string): boolean =>
-  new RegExp(/[^A-Za-z0-9_\-$]/).test(username);
+const updateFormSubmitButtonState = (): void => {
+  const validForm: boolean = validUsername && validPassword;
 
-const handleUsernameValidation = ({
-  value,
-}: Partial<HTMLInputElement>): void => {
-  invalidUsername =
-    value === "" ||
-    isInvalidUsernameLength(value!) ||
-    isInvalidUsernamePattern(value!);
-};
-
-const handleUsernameErrorHints = ({
-  value,
-  classList,
-}: Partial<HTMLInputElement>): void => {
-  invalidCharactersSmallRef.hidden = true;
-  fewCharactersSmallRef.hidden = true;
-  classList!.remove(invalidInputClass);
-  fewCharactersSmallRef.classList.remove(visibleSmallClass);
-  invalidCharactersSmallRef.classList.remove(
-    visibleSmallClass
-  );
-
-  if (value !== "") {
-    invalidUsername && classList!.add(invalidInputClass);
-    console.log(classList)
-
-    if (isInvalidUsernameLength(value!)) {
-      fewCharactersSmallRef.hidden = false;
-      fewCharactersSmallRef.classList.add(visibleSmallClass);
-    } else if (isInvalidUsernamePattern(value!)) {
-      invalidCharactersSmallRef.hidden = false;
-      invalidCharactersSmallRef.classList.add(
-        visibleSmallClass
-      );
-    }
+  if (!validForm) {
+    loginButtonRef.setAttribute("disabled", "disabled");
+    return;
   }
+
+  loginButtonRef.removeAttribute("disabled");
 };
 
-const handlePasswordValidation = ({
-  value,
-}: Partial<HTMLInputElement>): void => {
-  invalidPassword = value === "";
+const resetAllUsernameValidators = (): void => {
+  showUsernameLengthValidator(false);
+  showUsernamePatternValidator(false);
+  usernameInputRef.classList.remove(invalidInputClass);
 };
 
-const updateLoginButton = (): void => {
-  invalidUsername || invalidPassword
-    ? loginButtonRef.setAttribute("disabled", "disabled")
-    : loginButtonRef.removeAttribute("disabled");
+const showUsernameLengthValidator = (show: boolean): void => {
+  fewCharactersSmallRef.hidden = !show;
+
+  if (!show) {
+    fewCharactersSmallRef.classList.remove(visibleSmallClass);
+    return;
+  }
+  
+  usernameInputRef.classList.add(invalidInputClass);
+  fewCharactersSmallRef.classList.add(visibleSmallClass);
+};
+
+const showUsernamePatternValidator = (show: boolean): void => {
+  invalidCharactersSmallRef.hidden = !show;
+
+  if (!show) {
+    invalidCharactersSmallRef.classList.remove(visibleSmallClass);
+    return;
+  }
+  
+  usernameInputRef.classList.add(invalidInputClass);
+  invalidCharactersSmallRef.classList.add(visibleSmallClass);
+};
+
+const handleUsernameValueChanges = ({ value }: HTMLInputElement): void => {
+  validUsername = false;
+
+  resetAllUsernameValidators();
+  
+  updateFormSubmitButtonState();
+
+  const hasUsername: boolean = value !== "";
+
+  if (!hasUsername) {
+    return;
+  }
+
+  const validUsernameLength: boolean = value.length >= 2;
+
+  if (!validUsernameLength) {
+    showUsernameLengthValidator(true);
+    showUsernamePatternValidator(false);
+    return;
+  }
+
+  const validUsernamePattern: boolean = new RegExp(/^[\w]+$/).test(value);
+
+  if (!validUsernamePattern) {
+    showUsernameLengthValidator(false);
+    showUsernamePatternValidator(true);
+    return;
+  }
+
+  validUsername = true;
+
+  resetAllUsernameValidators();
+  updateFormSubmitButtonState();
+};
+
+const handlePasswordValueChanges = ({ value }: HTMLInputElement): void => {
+  validPassword = false;
+
+  updateFormSubmitButtonState();
+
+  const hasPassword: boolean = value !== "";
+
+  if (!hasPassword) {
+    return;
+  }
+
+  validPassword = true;
+
+  updateFormSubmitButtonState();
 };

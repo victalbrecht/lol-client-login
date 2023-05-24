@@ -14,9 +14,11 @@
     <title>League of Legends Client Login</title>
   </head>
   <body>
-    <main class="client">
-      <section class="client__window-controls">
-        <button class="client__button client__window-controls__button--minimize">
+    <main class="client" id="client">
+      <section class="client__window-controls" id="client-window-controls">
+        <button
+          class="client__button client__window-controls__button--minimize"
+        >
           <i class="fa-regular fa-minus"></i>
         </button>
         <button class="client__button client__window-controls__button--close">
@@ -41,16 +43,13 @@
               <input
                 class="client__input__field"
                 type="text"
-                id="username"
-                name="username"
+                id="username-input"
+                name="username-input"
                 autocomplete="off"
                 placeholder=" "
-                onkeyup="handleUsernameValidation(this); updateLoginButton()"
-                onblur="handleUsernameErrorHints(this)"
+                onkeyup="handleUsernameValueChanges(this)"
               />
-              <label
-                class="client__input__label"
-                for="username"
+              <label class="client__input__label" for="username-input"
                 >Username</label
               >
               <small
@@ -59,10 +58,7 @@
                 hidden
                 >Special characters not allowed in username</small
               >
-              <small
-                class="client__input__small"
-                id="few-chars-small"
-                hidden
+              <small class="client__input__small" id="few-chars-small" hidden
                 >Must be at least 2 characters long</small
               >
             </div>
@@ -70,20 +66,20 @@
               <input
                 class="client__input__field"
                 type="password"
-                id="password"
-                name="password"
+                id="password-input"
+                name="password-input"
                 autocomplete="off"
                 placeholder=" "
-                onkeyup="handlePasswordValidation(this); updateLoginButton()"
+                onkeyup="handlePasswordValueChanges(this)"
               />
-              <label
-                class="client__input__label"
-                for="password"
+              <label class="client__input__label" for="password-input"
                 >Password</label
               >
             </div>
             <div class="client__login-area__body__social-medias">
-              <ul class="client__list client__login-area__body__social-medias__list">
+              <ul
+                class="client__list client__login-area__body__social-medias__list"
+              >
                 <li
                   class="client__login-area__body__social-medias__list__item--facebook"
                 >
@@ -114,9 +110,7 @@
                 id="keep-login"
                 hidden
               />
-              <label
-                class="client__input__checkbox__label"
-                for="keep-login"
+              <label class="client__input__checkbox__label" for="keep-login"
                 >Stay signed in</label
               >
             </div>
@@ -132,22 +126,30 @@
           >
             <i class="fa-regular fa-arrow-right fa-2xl"></i>
           </button>
-          <a class="client__link"
-            >Can't sign in?</a
-          >
+          <a class="client__link">Can't sign in?</a>
           <a class="client__link">Create account</a>
         </footer>
       </section>
       <aside class="client__bg-area">
-        <video class="client__bg-area__background" src="assets/video/background.mp4" disablepictureinpicture disableremoteplayback preload loop autoplay muted></video>
+        <video
+          class="client__bg-area__background"
+          src="assets/video/background.mp4"
+          disablepictureinpicture
+          disableremoteplayback
+          preload
+          loop
+          autoplay
+          muted
+        ></video>
       </aside>
     </main>
 
     <select
-      class="client__resolution-selector"
-      onchange="changeClientResolution(this)"
+      class="client__resolution-select"
+      id="client-resolution-select"
+      onchange="handleClientResolutionChanges(this)"
     >
-      <option value="">Resolution</option>
+    <option value="" disabled>Resolution</option>
     </select>
   </body>
 </html>

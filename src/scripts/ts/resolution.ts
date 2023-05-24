@@ -1,38 +1,54 @@
-const clientResolutionSelectRef: HTMLSelectElement = document.querySelector(
-  ".client__resolution-selector"
-)!;
-
 interface ResolutionProperties {
   width: number;
   height: number;
   fontSize: number;
+  default?: boolean;
 }
+
+const resolutionClientRef: HTMLElement = document.getElementById("client")!;
+
+const clientResolutionSelectRef: HTMLSelectElement = document.getElementById(
+  "client-resolution-select"
+)! as HTMLSelectElement;
 
 const resolutions: Array<ResolutionProperties> = [
   { width: 1024, height: 576, fontSize: 11 },
   { width: 1280, height: 720, fontSize: 12 },
-  { width: 1600, height: 900, fontSize: 14 },
+  { width: 1600, height: 900, fontSize: 14, default: true },
   { width: 1920, height: 1080, fontSize: 15 },
 ];
 
-const changeClientResolution = ({
-  value,
-}: Partial<HTMLSelectElement>): void => {
-  if (value !== "") {
-    const { width, height, fontSize }: ResolutionProperties =
-      resolutions[Number(value)];
-
-    document.documentElement.style.fontSize = `${fontSize}px`;
-    clientRef.style.height = `${height}px`;
-    clientRef.style.width = `${width}px`;
-  }
+const handleClientResolutionChanges = ({ value }: HTMLSelectElement): void => {
+  const resolution: number = Number(value);
+  setClientResolution(resolution);
 };
 
-resolutions.forEach((resolution: ResolutionProperties, index: number) => {
-  const option: HTMLOptionElement = document.createElement("option");
+const setClientResolution = (resolution: number): void => {
+  const selectedResolution: ResolutionProperties = resolutions.find(
+    ({ width }: ResolutionProperties) => width === resolution
+  )!;
 
-  option.text = `${resolution.width} x ${resolution.height}`;
-  option.value = index.toString();
+  const { width, height, fontSize }: ResolutionProperties = selectedResolution;
 
-  clientResolutionSelectRef.options.add(option);
-});
+  document.documentElement.style.fontSize = `${fontSize}px`;
+  resolutionClientRef.style.height = `${height}px`;
+  resolutionClientRef.style.width = `${width}px`;
+};
+
+const setResolutionList = (): void => {
+  resolutions.forEach((resolution: ResolutionProperties) => {
+    const option: HTMLOptionElement = document.createElement("option");
+
+    option.text = `${resolution.width} x ${resolution.height}`;
+    option.value = resolution.width.toString();
+
+    clientResolutionSelectRef.options.add(option);
+
+    if (resolution.default) {
+      setClientResolution(resolution.width);
+      option.selected = true;
+    }
+  });
+};
+
+setResolutionList();
