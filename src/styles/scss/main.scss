@@ -111,7 +111,7 @@ html {
 
       &__title {
         font-size: 1.55rem;
-        font-weight: 700;
+        font-weight: 500;
         text-align: center;
         letter-spacing: -0.1rem;
         color: $login-title-color;
@@ -134,7 +134,8 @@ html {
           &__item {
             &--facebook,
             &--google,
-            &--apple {
+            &--apple,
+            &--xbox {
               display: flex;
               justify-content: center;
               align-items: center;
@@ -146,7 +147,8 @@ html {
             }
 
             &--google,
-            &--apple {
+            &--apple,
+            &--xbox {
               margin-left: 0.8rem;
             }
 
@@ -203,6 +205,10 @@ html {
 
             &--apple {
               @include social-media-button(#000000, #141414, #292929, 1.5rem);
+            }
+
+            &--xbox {
+              @include social-media-button(#107C10, #076907, #005400, 1.1rem);
             }
           }
         }
