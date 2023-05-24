@@ -34,17 +34,12 @@ html {
   width: 1600px;
   height: 900px;
 
-  &__resolution-selector,
-  &__splash-selector {
+  &__resolution-selector {
     position: fixed;
     width: 100px;
     bottom: 0;
     left: 0;
     z-index: 1;
-  }
-
-  &__splash-selector {
-    left: 120px;
   }
 
   &__window-controls {
