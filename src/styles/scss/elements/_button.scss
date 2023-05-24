@@ -1,12 +1,15 @@
 .client__button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  cursor: pointer;
+  &,
+  &--primary-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
 
-  &:disabled {
-    cursor: default;
+    &:disabled {
+      cursor: default;
+    }
   }
 
   &--primary-action {
