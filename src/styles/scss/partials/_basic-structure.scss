@@ -1,0 +1,158 @@
+.client {
+  display: flex;
+  position: absolute;
+
+  &__login-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 26%;
+    padding: 4rem;
+    background-color: $login-bg;
+
+    &__header {
+      &__logo {
+        width: 8rem;
+        height: 2.3rem;
+      }
+    }
+
+    &__body {
+      width: 100%;
+      margin-top: 3rem;
+
+      &__title {
+        font-size: 1.55rem;
+        font-weight: 500;
+        text-align: center;
+        letter-spacing: -0.1rem;
+        color: $login-title-color;
+      }
+
+      .client__input {
+        margin-top: 1.2rem;
+
+        &:first-of-type {
+          margin-top: 0.6rem;
+        }
+      }
+
+      &__social-medias {
+        margin-top: 1.8rem;
+
+        &__list {
+          display: flex;
+
+          &__item {
+            &--facebook,
+            &--google,
+            &--apple,
+            &--xbox {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 2.2rem;
+              flex: 1;
+              border-radius: 0.3rem;
+              cursor: pointer;
+              color: #ffffff;
+            }
+
+            &--google,
+            &--apple,
+            &--xbox {
+              margin-left: 0.8rem;
+            }
+
+            @mixin social-media-button(
+              $defaultBackground,
+              $hoverBackground,
+              $activeBackground,
+              $icon-size
+            ) {
+              background-color: $defaultBackground;
+
+              &:hover {
+                background-color: $hoverBackground;
+              }
+
+              &:active {
+                background-color: $activeBackground;
+              }
+
+              > .fa-brands {
+                width: $icon-size;
+                height: $icon-size;
+                font-size: $icon-size;
+                text-align: center;
+              }
+            }
+
+            &--facebook {
+              @include social-media-button(#1877f2, #0966de, #004fb5, 1.15rem);
+            }
+
+            &--google {
+              @include social-media-button(#ffffff, #f9f9f9, #f0f0f0, 1.15rem);
+              border: 2px solid #f2f2f2;
+
+              &:active {
+                border-color: #e4e4e4;
+              }
+
+              > .fa-brands {
+                background: conic-gradient(
+                    from -45deg,
+                    #ea4335 110deg,
+                    #4285f4 90deg 180deg,
+                    #34a853 180deg 270deg,
+                    #fbbc05 270deg
+                  )
+                  73% 55%/150% 150% no-repeat;
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+              }
+            }
+
+            &--apple {
+              @include social-media-button(#000000, #141414, #292929, 1.5rem);
+            }
+
+            &--xbox {
+              @include social-media-button(#107c10, #076907, #005400, 1.1rem);
+            }
+          }
+        }
+      }
+
+      &__keep-login {
+        display: flex;
+        align-items: center;
+        position: relative;
+        margin-top: 1.2rem;
+      }
+    }
+
+    &__footer {
+      align-items: center;
+      margin-top: auto;
+    }
+
+    &__body,
+    &__footer {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__bg-area {
+    flex-basis: 74%;
+    overflow: hidden;
+
+    &__background {
+      height: 100%;
+      margin-left: -26%;
+    }
+  }
+}
