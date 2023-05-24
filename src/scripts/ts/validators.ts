@@ -1,4 +1,4 @@
-const invalidInputClass: string = "client__input--invalid";
+const invalidInputClass: string = "client__input__field--invalid";
 
 const visibleSmallClass: string =
   "client__input__small--visible";
@@ -46,6 +46,7 @@ const handleUsernameErrorHints = ({
 
   if (value !== "") {
     invalidUsername && classList!.add(invalidInputClass);
+    console.log(classList)
 
     if (isInvalidUsernameLength(value!)) {
       fewCharactersSmallRef.hidden = false;
