@@ -64,7 +64,7 @@
             </div>
             <div class="client__input">
               <input
-                class="client__input__field"
+                class="client__input__field--password"
                 type="password"
                 id="password-input"
                 name="password-input"
@@ -75,6 +75,7 @@
               <label class="client__input__label" for="password-input"
                 >Password</label
               >
+              <i class="client__input__icon fa-regular fa-eye-slash" id="password-toggle-icon" onclick="togglePasswordInputIcon(this)" onmousedown="event.preventDefault()"></i>
             </div>
             <div class="client__login-area__body__social-medias">
               <ul
@@ -149,7 +150,7 @@
       id="client-resolution-select"
       onchange="handleClientResolutionChanges(this)"
     >
-    <option value="" disabled>Resolution</option>
+      <option value="" disabled>Resolution</option>
     </select>
   </body>
 </html>

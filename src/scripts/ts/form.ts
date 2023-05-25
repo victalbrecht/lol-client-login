@@ -2,6 +2,10 @@ const usernameInputRef: HTMLInputElement = document.getElementById(
   "username-input"
 )! as HTMLInputElement;
 
+const passwordInputRef: HTMLInputElement = document.getElementById(
+  "password-input"
+)! as HTMLInputElement;
+
 const invalidCharactersSmallRef: HTMLElement = document.getElementById(
   "invalid-chars-small"
 )!;
@@ -43,7 +47,7 @@ const showUsernameLengthValidator = (show: boolean): void => {
     fewCharactersSmallRef.classList.remove(visibleSmallClass);
     return;
   }
-  
+
   usernameInputRef.classList.add(invalidInputClass);
   fewCharactersSmallRef.classList.add(visibleSmallClass);
 };
@@ -55,7 +59,7 @@ const showUsernamePatternValidator = (show: boolean): void => {
     invalidCharactersSmallRef.classList.remove(visibleSmallClass);
     return;
   }
-  
+
   usernameInputRef.classList.add(invalidInputClass);
   invalidCharactersSmallRef.classList.add(visibleSmallClass);
 };
@@ -64,7 +68,7 @@ const handleUsernameValueChanges = ({ value }: HTMLInputElement): void => {
   validUsername = false;
 
   resetAllUsernameValidators();
-  
+
   updateFormSubmitButtonState();
 
   const hasUsername: boolean = value !== "";
@@ -109,4 +113,10 @@ const handlePasswordValueChanges = ({ value }: HTMLInputElement): void => {
   validPassword = true;
 
   updateFormSubmitButtonState();
+};
+
+const togglePasswordInputIcon = ({ classList }: HTMLElement): void => {
+  const closedEyeIconClass: string = "fa-eye";
+  passwordInputRef.type = passwordInputRef.type === 'password' ? 'text' : 'password';
+  classList.toggle(closedEyeIconClass);
 };

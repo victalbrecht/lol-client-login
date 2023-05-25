@@ -27,7 +27,7 @@ const transpileAndMinifyTypeScript = () =>
           "ES2015.Iterable",
           "ES2015",
         ],
-        target: "es5",
+        target: "es6",
       })
     )
     .pipe(
