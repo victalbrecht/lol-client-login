@@ -6,17 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="shortcut icon"
-      href="assets/img/favicon.ico?v=25h3cabcg9dd7"
+      href="assets/img/favicon.ico?v=aa3b92c8c5h7d"
       type="image/x-icon"
     />
-    <link rel="stylesheet" href="main.min.css?v=25h3cabcg9dd7" />
-    <script src="main.min.js?v=25h3cabcg9dd7" defer></script>
+    <link rel="stylesheet" href="main.min.css?v=aa3b92c8c5h7d" />
+    <script src="main.min.js?v=aa3b92c8c5h7d" defer></script>
     <title>League of Legends Client Login</title>
   </head>
   <body>
-    <main class="client">
-      <section class="client__window-controls">
-        <button class="client__button client__window-controls__button--minimize">
+    <main class="client" id="client">
+      <section class="client__window-controls" id="client-window-controls">
+        <button
+          class="client__button client__window-controls__button--minimize"
+        >
           <i class="fa-regular fa-minus"></i>
         </button>
         <button class="client__button client__window-controls__button--close">
@@ -28,63 +30,57 @@
           <figure>
             <img
               class="client__login-area__header__logo"
-              src="assets/img/riot-logo.png?v=25h3cabcg9dd7"
+              src="assets/img/riot-logo.png?v=aa3b92c8c5h7d"
               alt="Riot Games Logo"
               draggable="false"
             />
           </figure>
         </header>
         <section class="client__login-area__body">
-          <h2 class="client__login-area__body__title">Fazer login</h2>
+          <h2 class="client__login-area__body__title">Sign in</h2>
           <form id="login-form" onsubmit="return false">
             <div class="client__input">
               <input
                 class="client__input__field"
                 type="text"
-                id="username"
-                name="username"
+                id="username-input"
+                name="username-input"
                 autocomplete="off"
                 placeholder=" "
-                onkeyup="handleUsernameValidation(this); updateLoginButton()"
-                onblur="handleUsernameErrorHints(this)"
+                onkeyup="handleUsernameValueChanges(this)"
               />
-              <label
-                class="client__input__label"
-                for="username"
-                >Nome de usuário</label
+              <label class="client__input__label" for="username-input"
+                >Username</label
               >
               <small
                 class="client__input__small"
                 id="invalid-chars-small"
                 hidden
-                >Caracteres especiais não são permitidos no nome de
-                usuário</small
+                >Special characters not allowed in username</small
               >
-              <small
-                class="client__input__small"
-                id="few-chars-small"
-                hidden
-                >Deve ter pelo menos 2 caracteres</small
+              <small class="client__input__small" id="few-chars-small" hidden
+                >Must be at least 2 characters long</small
               >
             </div>
             <div class="client__input">
               <input
-                class="client__input__field"
+                class="client__input__field--password"
                 type="password"
-                id="password"
-                name="password"
+                id="password-input"
+                name="password-input"
                 autocomplete="off"
                 placeholder=" "
-                onkeyup="handlePasswordValidation(this); updateLoginButton()"
+                onkeyup="handlePasswordValueChanges(this)"
               />
-              <label
-                class="client__input__label"
-                for="password"
-                >Senha</label
+              <label class="client__input__label" for="password-input"
+                >Password</label
               >
+              <i class="client__input__icon fa-regular fa-eye-slash" id="password-toggle-icon" onclick="togglePasswordInputIcon(this)" onmousedown="event.preventDefault()"></i>
             </div>
             <div class="client__login-area__body__social-medias">
-              <ul class="client__list client__login-area__body__social-medias__list">
+              <ul
+                class="client__list client__login-area__body__social-medias__list"
+              >
                 <li
                   class="client__login-area__body__social-medias__list__item--facebook"
                 >
@@ -100,6 +96,11 @@
                 >
                   <i class="fa-brands fa-apple"></i>
                 </li>
+                <li
+                  class="client__login-area__body__social-medias__list__item--xbox"
+                >
+                  <i class="fa-brands fa-xbox"></i>
+                </li>
               </ul>
             </div>
             <div class="client__login-area__body__keep-login">
@@ -110,10 +111,8 @@
                 id="keep-login"
                 hidden
               />
-              <label
-                class="client__input__checkbox__label"
-                for="keep-login"
-                >Manter login</label
+              <label class="client__input__checkbox__label" for="keep-login"
+                >Stay signed in</label
               >
             </div>
           </form>
@@ -128,22 +127,30 @@
           >
             <i class="fa-regular fa-arrow-right fa-2xl"></i>
           </button>
-          <a class="client__link"
-            >Não consegue iniciar sessão?</a
-          >
-          <a class="client__link">Criar uma conta</a>
+          <a class="client__link">Can't sign in?</a>
+          <a class="client__link">Create account</a>
         </footer>
       </section>
       <aside class="client__bg-area">
-        <video class="client__bg-area__background" src="assets/video/background.mp4?v=25h3cabcg9dd7" disablepictureinpicture disableremoteplayback preload loop autoplay muted></video>
+        <video
+          class="client__bg-area__background"
+          src="assets/video/background.mp4?v=aa3b92c8c5h7d"
+          disablepictureinpicture
+          disableremoteplayback
+          preload
+          loop
+          autoplay
+          muted
+        ></video>
       </aside>
     </main>
 
     <select
-      class="client__resolution-selector"
-      onchange="changeClientResolution(this)"
+      class="client__resolution-select"
+      id="client-resolution-select"
+      onchange="handleClientResolutionChanges(this)"
     >
-      <option value="">Resolução</option>
+      <option value="" disabled>Resolution</option>
     </select>
   </body>
 </html>
